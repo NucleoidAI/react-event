@@ -1,7 +1,7 @@
 import { v4 as uuid } from "uuid";
 
 const subscriptions = {};
-const eventMap = new Map();
+const map = new Map();
 
 const subscribe = (type, callback) => {
   const id = uuid();
@@ -26,4 +26,4 @@ const publish = (type, payload) => {
   }, 0);
 };
 
-export { subscribe, publish, eventMap };
+export { subscribe, publish, map };
