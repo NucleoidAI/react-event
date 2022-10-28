@@ -2,7 +2,7 @@ import React from "react";
 
 import { map, publish, subscribe } from "../Event";
 
-function updateMap(subject, state) {
+function lastState(subject, state) {
   if (map.has(subject)) {
     return map.get(subject);
   } else {
@@ -12,7 +12,7 @@ function updateMap(subject, state) {
 }
 
 const useEvent = (subject = "", initialState) => {
-  const [event, setEvent] = React.useState(updateMap(subject, initialState));
+  const [event, setEvent] = React.useState(lastState(subject, initialState));
 
   React.useEffect(() => {
     const subs = subscribe(subject, (event) => {
