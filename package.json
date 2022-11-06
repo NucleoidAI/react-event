@@ -16,5 +16,12 @@
   "author": "Nuc Team",
   "devDependencies": {
     "react": "^18.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NucleoidJS/synapses.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NucleoidJS/synapses/issues"
   }
 }
