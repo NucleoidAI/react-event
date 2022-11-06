@@ -29,4 +29,3 @@ const useEvent = (subject = "", initialState) => {
 };
 
 export { useEvent, publish };
-export default useEvent;

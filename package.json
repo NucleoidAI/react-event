@@ -2,7 +2,7 @@
   "name": "synapses",
   "version": "0.1.0",
   "description": "",
-  "main": "useEvent.js",
+  "main": "src/useEvent.js",
   "homepage": "https://nucleoid.com",
 
   "license": "Apache-2.0",
