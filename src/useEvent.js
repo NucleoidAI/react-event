@@ -1,6 +1,6 @@
 import React from "react";
 
-import { map, publish, subscribe } from "../Event";
+import { map, publish, subscribe } from "./Event";
 
 function lastState(subject, state) {
   if (map.has(subject)) {
