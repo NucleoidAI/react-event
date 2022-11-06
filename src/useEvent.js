@@ -28,4 +28,4 @@ const useEvent = (subject = "", initialState) => {
   return [event, publish];
 };
 
-export { useEvent, publish };
+export { useEvent };
