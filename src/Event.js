@@ -18,12 +18,13 @@ const subscribe = (type, callback) => {
 };
 
 const publish = (type, payload) => {
-  setTimeout(() => {
+  return new Promise((resolve) => {
     if (!subscriptions[type]) return;
     Object.keys(subscriptions[type]).forEach((key) => {
       subscriptions[type][key](payload);
+      resolve();
     });
-  }, 0);
+  });
 };
 
 export { subscribe, publish, map };
