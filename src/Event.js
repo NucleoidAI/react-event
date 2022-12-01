@@ -17,13 +17,13 @@ const subscribe = (type, callback) => {
   };
 };
 
-const publish = (type, payload) => {
-  return new Promise((resolve) => {
-    if (!subscriptions[type]) return;
-    Object.keys(subscriptions[type]).forEach((key) => {
+const publish = async (type, payload) => {
+  if (!subscriptions[type]) return;
+
+  Object.keys(subscriptions[type]).forEach((key) => {
+    setTimeout(() => {
       subscriptions[type][key](payload);
-      resolve();
-    });
+    }, 0);
   });
 };
 
