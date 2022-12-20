@@ -10,19 +10,19 @@ function last(type, init) {
   }
 }
 
-const useEvent = (subject = "", init) => {
-  const [payload, setPayload] = React.useState(last(subject, init));
+const useEvent = (type = "", init) => {
+  const [payload, setPayload] = React.useState(last(type, init));
 
   React.useEffect(() => {
-    const registry = subscribe(subject, (event) => {
-      map.set(subject, event);
+    const registry = subscribe(type, (event) => {
+      map.set(type, event);
       setPayload(event);
     });
 
     return () => {
       registry.unsubscribe();
     };
-  }, [subject]);
+  }, [type]);
 
   return [payload, publish];
 };
