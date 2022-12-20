@@ -6,15 +6,15 @@ import styles from "./components/styles";
 
 const App = () => {
   return (
-    <>
-      <div style={styles.wrapper}>
+    <div style={styles.center}>
+      <div style={styles.box}>
         <Component1 />
         <Component2 />
       </div>
-      <div style={styles.wrapper}>
+      <div style={styles.box}>
         <PublishComponent />
       </div>
-    </>
+    </div>
   );
 };
 export default App;

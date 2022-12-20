@@ -1,18 +1,16 @@
 const styles = {
-  box: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "130px",
-    height: "130px",
-    boxShadow:
-      "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px",
+  center: {
+    position: "absolute",
+    left: "50%",
+    top: "50%",
+    transform: "translate(-50%, -50%)",
   },
-  wrapper: {
+  box: {
     display: "flex",
     width: "100%",
     justifyContent: "space-around",
     alignItems: "center",
+    margin: "10px",
     fontFamily: "monospace",
     fontSize: "20px",
     minHeight: "80px",

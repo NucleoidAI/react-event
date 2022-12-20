@@ -5,7 +5,13 @@ import styles from "./styles";
 const Component2 = () => {
   const [event] = useEvent("BUTTON_CLICKED", { string: "blue" });
 
-  return <div style={styles.box}>"{event.string}"</div>;
+  return (
+    <div className={"card"}>
+      <div className={"card-body"}>
+        <h5 className={"card-title"}>"{event.string}"</h5>
+      </div>
+    </div>
+  );
 };
 
 export default Component2;
