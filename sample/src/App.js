@@ -1,8 +1,8 @@
 import React from "react";
-import Component1 from "./components/Component1";
-import Component2 from "./components/Component2";
-import PublishComponent from "./components/PublishComponent";
-import styles from "./components/styles";
+import Component1 from "./Component1";
+import Component2 from "./Component2";
+import PublishComponent from "./PublishComponent";
+import styles from "./styles";
 
 const App = () => {
   return (
