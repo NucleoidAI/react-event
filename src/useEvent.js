@@ -2,30 +2,29 @@ import React from "react";
 
 import { map, publish, subscribe } from "./Event";
 
-function lastState(subject, state) {
-  if (map.has(subject)) {
-    return map.get(subject);
+function last(type, init) {
+  if (map.has(type)) {
+    return map.get(type);
   } else {
-    map.set(subject, state);
-    return state;
+    return init;
   }
 }
 
-const useEvent = (subject = "", initialState) => {
-  const [event, setEvent] = React.useState(lastState(subject, initialState));
+const useEvent = (subject = "", init) => {
+  const [payload, setPayload] = React.useState(last(subject, init));
 
   React.useEffect(() => {
-    const subs = subscribe(subject, (event) => {
+    const registry = subscribe(subject, (event) => {
       map.set(subject, event);
-      setEvent(event);
+      setPayload(event);
     });
 
     return () => {
-      subs.unsubscribe();
+      registry.unsubscribe();
     };
   }, [subject]);
 
-  return [event, publish];
+  return [payload, publish];
 };
 
 export { useEvent };

@@ -5,19 +5,25 @@ const map = new Map();
 
 const subscribe = (type, callback) => {
   const id = uuid();
-  if (!subscriptions[type]) subscriptions[type] = {};
+
+  if (!subscriptions[type]) {
+    subscriptions[type] = {};
+  }
+
   subscriptions[type][id] = callback;
 
   return {
     unsubscribe: () => {
       delete subscriptions[type][id];
-      if (Object.keys(subscriptions[type]).length === 0)
+
+      if (Object.keys(subscriptions[type]).length === 0) {
         delete subscriptions[type];
+      }
     },
   };
 };
 
-const publish = async (type, payload) => {
+const publish = (type, payload) => {
   if (!subscriptions[type]) return;
 
   Object.keys(subscriptions[type]).forEach((key) => {
