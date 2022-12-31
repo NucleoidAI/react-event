@@ -68,6 +68,26 @@ const Component2 = () => {
 };
 ```
 
-<img src=".github/media/sample.gif" width="350" />
+<img src=".github/media/sample.gif" alt="Sample Synapses" width="350" />
 
 The complete sample project is [here](./sample).
+
+### Stateless Handler
+
+Synapses supports stateless components with caching last published payload for the event type, so that if the component is re-rendered, it won't lose the payload. For example, Component 3 in this example is not re-rendered yet, but Synapses holds the last payload for the event type, and once the component is rendered, it returns the payload instead of initial value.
+
+![Synapses Diagram](.github/media/synapses.drawio.png)
+
+## API
+
+#### `const [ event ] = useEvent ( eventType , initialValue )`
+
+React Hook is to subscribe an event. If there is no event posted yet, it returns `initialValue`, otherwise, returns last published payload for the event type from cache.
+
+#### `publish ( eventType, payload )`
+
+Publish function to post ane event and its payload.
+
+#### `subscribe ( type , callback )`
+
+Subscribe function acts like `useEvent` for non-React JavaScript.
