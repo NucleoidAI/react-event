@@ -33,13 +33,13 @@ Subscribers are registered an event with `useEvent(eventType, initialValue)`, on
 
 Example:
 ```javascript
+import { publish } from "@nucleoidjs/synapses";
+
 const PublishComponent = () => {
   return (
       <button
           onClick={() => {
-            const event = random(); // { number: 11, string: "red" }
-
-            publish("BUTTON_CLICKED", event);
+            publish("BUTTON_CLICKED", { number: 11, string: "red" });
           }}
       >
         Button
@@ -49,6 +49,8 @@ const PublishComponent = () => {
 ```
 
 ```javascript
+import { useEvent } from "@nucleoidjs/synapses";
+
 const Component1 = () => {
   const [event] = useEvent("BUTTON_CLICKED", { number: 10 });
 
@@ -57,6 +59,8 @@ const Component1 = () => {
 ```
 
 ```javascript
+import { useEvent } from "@nucleoidjs/synapses";
+
 const Component2 = () => {
   const [event] = useEvent("BUTTON_CLICKED", { string: "blue" });
 
