@@ -76,7 +76,7 @@ The complete sample project is [here](./sample).
 
 Synapses supports stateless components with caching last published payload for the event type, so that if the component is re-rendered, it won't lose the payload. For example, Component 3 in this example is not re-rendered yet, but Synapses holds the last payload for the event type, and once the component is rendered, it returns the payload instead of initial value.
 
-![Synapses Diagram](.github/media/synapses.drawio.png)
+<img src=".github/media/synapses.drawio.png" alt="Synapses Diagram" width="350" />
 
 ## API
 
