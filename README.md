@@ -12,7 +12,7 @@
   </a>
 </p>
 
-[![Banner](.github/media/banner.png)](http://nucleoid.com/)
+![Banner](.github/media/banner.png)]
 
 <p align="center">
   Event-driven Alternative to React Context
@@ -24,12 +24,11 @@
 npm i @nucleoidjs/synapses
 ```
 
-Synapses is an alternative to React Context with event-driven style that helps to build  loosely coupled components.
+Synapses is an alternative to React Context with event-driven style communication that helps to build loosely coupled components.
 
 ### How it works?
 
-Subscribers are registered an event with `useEvent(eventType, initialValue)`, once publisher posts an event and its payload, and Synapses sends the event to subscribed components asynchronously and subscribed components will eventually be re-rendered with fresh data.
-
+Subscribers are registered an event with the custom hook `useEvent(eventType, initialValue)`, once publisher posts an event and its payload, Synapses asynchronously sends the event to subscribed components and subscribed components will eventually be re-rendered with fresh data.
 
 Example:
 ```javascript
@@ -72,11 +71,15 @@ const Component2 = () => {
 
 The complete sample project is [here](./sample).
 
-### Stateless Handler
+### Stateless Handling
 
 Synapses supports stateless components with caching last published payload for the event type, so that if the component is re-rendered, it won't lose the payload. For example, Component 3 in this example is not re-rendered yet, but Synapses holds the last payload for the event type, and once the component is rendered, it returns the payload instead of initial value.
 
 <img src=".github/media/synapses.drawio.png" alt="Synapses Diagram" width="350" />
+
+## Event-driven Architecture
+
+Event-driven Architecture is commonly used in Microservices systems that pretty much targets similar problem; loose coupling. This style of architecture require middleware like Kafka, RabbitMQ etc. and we are trying to adopt the very same idea to React.js, of course with some modification such as "Stateless Handling".
 
 ## API
 
