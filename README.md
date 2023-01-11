@@ -12,7 +12,7 @@
   </a>
 </p>
 
-![Banner](.github/media/banner.png)]
+![Banner](.github/media/synapses-banner.png)
 
 <p align="center">
   Event-driven Alternative to React Context
