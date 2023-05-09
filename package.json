@@ -1,6 +1,6 @@
 {
   "name": "@nucleoidjs/synapses",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "type": "module",
   "description": "Event-driven alternative to React Context",
   "main": "index.js",
