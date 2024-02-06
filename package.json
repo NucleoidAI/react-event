@@ -1,5 +1,5 @@
 {
-  "name": "react-event",
+  "name": "@nucleoidjs/react-event",
   "version": "1.0.14",
   "type": "module",
   "description": "Event-driven alternative to React Context",
