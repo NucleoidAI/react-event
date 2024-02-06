@@ -1,4 +1,4 @@
-import { publish, subscribe } from "../../index";
+import { map, publish, subscribe } from "../Event";
 
 describe("Synapses", () => {
   it("subscribes and publishes events", (done) => {
@@ -43,5 +43,12 @@ describe("Synapses", () => {
     expect(() =>
       publish("NO_SUBSCRIBER_EVENT", { data: "none" })
     ).not.toThrow();
+  });
+
+  it("registers the last published event to map", () => {
+    publish("LAST_EVENT", { data: "test payload" });
+
+    const lastPublishedEvent = map.get("LAST_EVENT");
+    expect(lastPublishedEvent).toEqual({ data: "test payload" });
   });
 });
