@@ -1,5 +1,5 @@
 {
-  "name": "@nucleoidjs/synapses",
+  "name": "react-event",
   "version": "1.0.13",
   "type": "module",
   "description": "Event-driven alternative to React Context",
