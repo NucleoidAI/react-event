@@ -1,9 +1,9 @@
 {
-  "name": "synapses-sample-project",
+  "name": "react-event-sample-project",
   "version": "1.0.0",
   "license": "Apache-2.0",
   "dependencies": {
-    "@nucleoidjs/synapses": "^1.0.7",
+    "@nucleoidai/react-event": "^1.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1"

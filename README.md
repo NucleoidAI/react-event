@@ -1,10 +1,10 @@
-<h1 align="center">Synapses</h1>
+<h1 align="center">react-event</h1>
 
 <p align="center">
   <a href="https://www.apache.org/licenses/LICENSE-2.0">
     <img src="https://img.shields.io/badge/Apache-2.0-yellow?style=for-the-badge&logo=apache" alt="License" />
   </a>
-  <a href="https://www.npmjs.com/package/@nucleoidjs/synapses">
+  <a href="https://www.npmjs.com/package/@nucleoidai/react-event">
     <img src="https://img.shields.io/badge/NPM-red?style=for-the-badge&logo=npm" alt="NPM" />
   </a>
   <a href="https://discord.com/invite/eWXFCCuU5y">
@@ -12,7 +12,7 @@
   </a>
 </p>
 
-![Banner](.github/media/synapses-banner.png)
+![Banner](.github/media/react-event-banner.png)
 
 <p align="center">
   Event-driven Alternative to React Context
@@ -21,18 +21,18 @@
 <br/>
 
 ```shell
-npm i @nucleoidjs/synapses
+npm i @nucleoidai/react-event
 ```
 
-Synapses is an alternative to React Context with event-driven style communication that helps to build loosely coupled components.
+react-event is an alternative to React Context with event-driven style communication that helps to build loosely coupled components.
 
 ### How it works?
 
-Subscribers are registered an event with the custom hook `useEvent(eventType, initialValue)`, once publisher posts an event and its payload, Synapses asynchronously sends the event to subscribed components and subscribed components will eventually be re-rendered with fresh data.
+Subscribers are registered an event with the custom hook `useEvent(eventType, initialValue)`, once publisher posts an event and its payload, react-event asynchronously sends the event to subscribed components and subscribed components will eventually be re-rendered with fresh data.
 
 Example:
 ```javascript
-import { publish } from "@nucleoidjs/synapses";
+import { publish } from "@nucleoidai/react-event";
 
 const PublishComponent = () => {
   return (
@@ -48,7 +48,7 @@ const PublishComponent = () => {
 ```
 
 ```javascript
-import { useEvent } from "@nucleoidjs/synapses";
+import { useEvent } from "@nucleoidai/react-event";
 
 const Component1 = () => {
   const [event] = useEvent("BUTTON_CLICKED", { number: 10 });
@@ -58,7 +58,7 @@ const Component1 = () => {
 ```
 
 ```javascript
-import { useEvent } from "@nucleoidjs/synapses";
+import { useEvent } from "@nucleoidai/react-event";
 
 const Component2 = () => {
   const [event] = useEvent("BUTTON_CLICKED", { string: "blue" });
@@ -67,15 +67,15 @@ const Component2 = () => {
 };
 ```
 
-<img src=".github/media/sample.gif" alt="Sample Synapses" width="350" />
+<img src=".github/media/sample.gif" alt="Sample react-event" width="350" />
 
 The complete sample project is [here](./sample).
 
 ### Stateless Handling
 
-Synapses supports stateless components with caching last published payload for the event type, so that if the component is re-rendered, it won't lose the payload. For example, Component 3 in this example is not re-rendered yet, but Synapses holds the last payload for the event type, and once the component is rendered, it returns the payload instead of initial value.
+react-event supports stateless components with caching last published payload for the event type, so that if the component is re-rendered, it won't lose the payload. For example, Component 3 in this example is not re-rendered yet, but react-event holds the last payload for the event type, and once the component is rendered, it returns the payload instead of initial value.
 
-<img src=".github/media/synapses.drawio.png" alt="Synapses Diagram" width="350" />
+<img src=".github/media/react-event.drawio.png" alt="react-event Diagram" width="350" />
 
 ## Event-driven Architecture
 

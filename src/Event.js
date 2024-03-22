@@ -24,6 +24,7 @@ const subscribe = (type, callback) => {
 };
 
 const publish = (type, payload) => {
+  console.log("react-event", type, payload);
   map.set(type, payload);
   if (!subscriptions[type]) return;
 

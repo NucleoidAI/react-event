@@ -1,6 +1,6 @@
 import { map, publish, subscribe } from "../Event";
 
-describe("Synapses", () => {
+describe("react-event", () => {
   it("subscribes and publishes events", (done) => {
     subscribe("TEST_EVENT", (result) => {
       expect(result).toMatchObject({ number: 10, string: "blue" });

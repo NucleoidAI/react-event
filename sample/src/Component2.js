@@ -1,5 +1,5 @@
 import React from "react";
-import { useEvent } from "@nucleoidjs/synapses";
+import { useEvent } from "@nucleoidai/react-event";
 
 const Component2 = () => {
   const [event] = useEvent("BUTTON_CLICKED", { string: "blue" });
