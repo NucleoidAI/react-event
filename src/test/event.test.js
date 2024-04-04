@@ -14,6 +14,15 @@ describe("react-event", () => {
     publish("TEST_EVENT", { number: 10, string: "blue" });
   });
 
+  it("publishes and subscribes events", (done) => {
+    publish("TEST_EVENT", { number: 10, string: "blue" });
+
+    subscribe("TEST_EVENT", (result) => {
+      expect(result).toMatchObject({ number: 10, string: "blue" });
+      done();
+    });
+  });
+
   it("notifies all subscribers of an event", (done) => {
     let receivedByFirstSubscriber = false;
     let receivedBySecondSubscriber = false;

@@ -12,6 +12,12 @@ const subscribe = (type, callback) => {
 
   subscriptions[type][id] = callback;
 
+  let last = map.get(type);
+
+  if (last) {
+    callback(last);
+  }
+
   return {
     unsubscribe: () => {
       delete subscriptions[type][id];
