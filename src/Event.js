@@ -21,6 +21,7 @@ const subscribe = (type, callback) => {
 
   return {
     unsubscribe: () => {
+      console.debug("react-event", "unsubscribe", type, id);
       delete subscriptions[type][id];
 
       if (Object.keys(subscriptions[type]).length === 0) {
