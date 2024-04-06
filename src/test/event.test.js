@@ -1,4 +1,4 @@
-import { map, publish, subscribe } from "../Event";
+import { subscribe, publish, messages } from "../Event";
 
 describe("react-event", () => {
   it("subscribes and publishes events", (done) => {
@@ -57,7 +57,7 @@ describe("react-event", () => {
   it("registers the last published event to map", () => {
     publish("LAST_EVENT", { data: "test payload" });
 
-    const lastPublishedEvent = map.get("LAST_EVENT");
+    const lastPublishedEvent = messages.get("LAST_EVENT");
     expect(lastPublishedEvent).toEqual({ data: "test payload" });
   });
 });

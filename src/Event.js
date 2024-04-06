@@ -1,10 +1,11 @@
 import { v4 as uuid } from "uuid";
 
 const subscriptions = {};
-const map = new Map();
+const messages = new Map();
 
 const subscribe = (type, callback) => {
   const id = uuid();
+  console.debug("react-event", "subscribe", type, id);
 
   if (!subscriptions[type]) {
     subscriptions[type] = {};
@@ -12,7 +13,7 @@ const subscribe = (type, callback) => {
 
   subscriptions[type][id] = callback;
 
-  let last = map.get(type);
+  let last = messages.get(type);
 
   if (last) {
     callback(last);
@@ -30,15 +31,22 @@ const subscribe = (type, callback) => {
 };
 
 const publish = (type, payload) => {
-  console.log("react-event", type, payload);
-  map.set(type, payload);
-  if (!subscriptions[type]) return;
+  console.log("react-event", "publish", type, payload);
+  messages.set(type, payload);
 
-  Object.keys(subscriptions[type]).forEach((key) => {
+  Object.keys(subscriptions[type] || {}).forEach((key) => {
     setTimeout(() => {
       subscriptions[type][key](payload);
     }, 0);
   });
 };
 
-export { subscribe, publish, map };
+function last(type, init) {
+  if (messages.has(type)) {
+    return messages.get(type);
+  } else {
+    return init;
+  }
+}
+
+export { subscribe, publish, messages, last };
