@@ -1,4 +1,4 @@
-import { subscribe, publish } from "./src/Event"
-import { useEvent } from './src/useEvent';
+import { subscribe, publish } from "./src/Event.js";
+import { useEvent } from "./src/useEvent.js";
 
-export { subscribe, publish, useEvent }
+export { subscribe, publish, useEvent };

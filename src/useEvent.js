@@ -1,6 +1,5 @@
 import React from "react";
-
-import { publish, subscribe, last } from "./Event";
+import { publish, subscribe, last } from "./Event.js";
 
 const useEvent = (type = "", init) => {
   const [payload, setPayload] = React.useState(last(type, init));

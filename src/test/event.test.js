@@ -1,4 +1,4 @@
-import { subscribe, publish, messages } from "../Event";
+import { subscribe, publish, messages } from "../Event.js";
 
 describe("react-event", () => {
   it("subscribes and publishes events", (done) => {
