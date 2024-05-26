@@ -11,13 +11,10 @@ const subscribe = (type, callback) => {
     subscriptions[type] = {};
   }
 
-  subscriptions[type][id] = callback;
-
-  let last = messages.get(type);
-
   const registry = {
     id,
     type,
+    callback,
     unsubscribe: () => {
       console.debug("react-event", "unsubscribe", type, id);
       delete subscriptions[type][id];
@@ -27,6 +24,10 @@ const subscribe = (type, callback) => {
       }
     },
   };
+
+  subscriptions[type][id] = registry;
+
+  let last = messages.get(type);
 
   if (last) {
     callback(last, registry);
@@ -40,8 +41,10 @@ const publish = (type, payload) => {
   messages.set(type, payload);
 
   Object.keys(subscriptions[type] || {}).forEach((key) => {
+    const registry = subscriptions[type][key];
+
     setTimeout(() => {
-      subscriptions[type][key](payload);
+      registry.callback(payload, registry);
     }, 0);
   });
 };

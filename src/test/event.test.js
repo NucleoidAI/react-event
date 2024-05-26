@@ -61,17 +61,35 @@ describe("react-event", () => {
     expect(lastPublishedEvent).toEqual({ data: "test payload" });
   });
 
-  it("returns registry in callback", () => {
+  it("returns registry in callback", (done) => {
     publish("CALLBACK_REGISTRY_EVENT", { data: "test payload" });
 
     subscribe("CALLBACK_REGISTRY_EVENT", (result, registry) => {
+      expect(result).toMatchObject({ data: "test payload" });
       expect(registry).toMatchObject({
         id: expect.any(String),
         type: "CALLBACK_REGISTRY_EVENT",
+        callback: expect.any(Function),
         unsubscribe: expect.any(Function),
       });
 
       registry.unsubscribe();
     });
+
+    subscribe("CALLBACK_REGISTRY_EVENT_2", (result, registry) => {
+      expect(result).toMatchObject({ data: "test payload 2" });
+      expect(registry).toMatchObject({
+        id: expect.any(String),
+        type: "CALLBACK_REGISTRY_EVENT_2",
+        callback: expect.any(Function),
+        unsubscribe: expect.any(Function),
+      });
+
+      registry.unsubscribe();
+
+      done();
+    });
+
+    publish("CALLBACK_REGISTRY_EVENT_2", { data: "test payload 2" });
   });
 });
