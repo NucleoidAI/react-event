@@ -4,6 +4,6 @@ on:
       tags:
         - v[0-9]+.[0-9]+.[0-9]+
 jobs:
-  deploy: 
-    uses: NucleoidJS/actions/.github/workflows/publish.yml@main
+  deploy:
+    uses: NucleoidAI/actions/.github/workflows/publish.yml@main
     secrets: inherit
