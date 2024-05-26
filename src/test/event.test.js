@@ -60,4 +60,18 @@ describe("react-event", () => {
     const lastPublishedEvent = messages.get("LAST_EVENT");
     expect(lastPublishedEvent).toEqual({ data: "test payload" });
   });
+
+  it("returns registry in callback", () => {
+    publish("CALLBACK_REGISTRY_EVENT", { data: "test payload" });
+
+    subscribe("CALLBACK_REGISTRY_EVENT", (result, registry) => {
+      expect(registry).toMatchObject({
+        id: expect.any(String),
+        type: "CALLBACK_REGISTRY_EVENT",
+        unsubscribe: expect.any(Function),
+      });
+
+      registry.unsubscribe();
+    });
+  });
 });
