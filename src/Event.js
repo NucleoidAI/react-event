@@ -1,10 +1,13 @@
+import chalk from "chalk";
 import { v4 as uuid } from "uuid";
-
 const subscriptions = {};
 const messages = new Map();
 
-const subscribe = (type, callback) => {
+const subscribe = (...args) => {
+  const callback = args.pop();
+  const type = args.join(".");
   const id = uuid();
+
   console.debug("react-event", "subscribe", type, id);
 
   if (!subscriptions[type]) {
@@ -36,8 +39,12 @@ const subscribe = (type, callback) => {
   return registry;
 };
 
-const publish = (type, payload) => {
-  console.log("react-event", "publish", type, payload);
+const publish = (...args) => {
+  const payload = args.pop();
+  const type = args.join(".");
+  const id = uuid();
+
+  console.log(chalk.green("react-event", "publish", type, payload));
   messages.set(type, payload);
 
   Object.keys(subscriptions[type] || {}).forEach((key) => {
@@ -58,3 +65,7 @@ function last(type, init) {
 }
 
 export { subscribe, publish, messages, last };
+
+//publish("PLATFORM", "WEB", "INSERT", {id:123})
+//publish(namespace,namespace,type,payload)
+
