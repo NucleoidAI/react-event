@@ -1,6 +1,10 @@
 import { subscribe, publish, messages } from "../Event.js";
 
 describe("react-event", () => {
+  it("accepts type and payload", () => {
+    expect(() => publish("TEST_EVENT")).toThrow();
+  });
+
   it("subscribes and publishes events", (done) => {
     subscribe("TEST_EVENT", (result) => {
       expect(result).toMatchObject({ number: 10, string: "blue" });
@@ -91,5 +95,17 @@ describe("react-event", () => {
     });
 
     publish("CALLBACK_REGISTRY_EVENT_2", { data: "test payload 2" });
+  });
+
+  it("supports namespaced events", (done) => {
+    subscribe("NAMESPACE_1", "NAMESPACE_2", "TEST_EVENT", (result) => {
+      expect(result).toMatchObject({ number: 10, string: "blue" });
+      done();
+    });
+
+    publish("NAMESPACE_1", "NAMESPACE_2", "TEST_EVENT", {
+      number: 10,
+      string: "blue",
+    });
   });
 });

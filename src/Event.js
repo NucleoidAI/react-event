@@ -1,11 +1,45 @@
+import chalk from "chalk";
 import { v4 as uuid } from "uuid";
 
 const subscriptions = {};
 const messages = new Map();
 
-const subscribe = (type, callback) => {
+const colors = [
+  "red",
+  "green",
+  "yellow",
+  "blue",
+  "magenta",
+  "cyan",
+  "white",
+  "gray",
+];
+
+function typeColor(type) {
+  const hash = (str) => {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = (hash << 5) - hash + char;
+      hash = hash & hash;
+    }
+    return Math.abs(hash);
+  };
+
+  const colorIndex = hash(type) % colors.length;
+  return colors[colorIndex];
+}
+
+const subscribe = (...args) => {
+  if (args.length < 2) {
+    throw new Error("subscribe requires at least 2 arguments");
+  }
+
+  const callback = args.pop();
+  const type = args.join(".");
   const id = uuid();
-  console.debug("react-event", "subscribe", type, id);
+
+  console.debug(chalk[typeColor(type)]("react-event", "subscribe", type, id));
 
   if (!subscriptions[type]) {
     subscriptions[type] = {};
@@ -16,7 +50,9 @@ const subscribe = (type, callback) => {
     type,
     callback,
     unsubscribe: () => {
-      console.debug("react-event", "unsubscribe", type, id);
+      console.debug(
+        chalk[typeColor(type)]("react-event", "unsubscribe", type, id)
+      );
       delete subscriptions[type][id];
 
       if (Object.keys(subscriptions[type]).length === 0) {
@@ -36,8 +72,22 @@ const subscribe = (type, callback) => {
   return registry;
 };
 
-const publish = (type, payload) => {
-  console.log("react-event", "publish", type, payload);
+const publish = (...args) => {
+  if (args.length < 2) {
+    throw new Error("publish requires at least 2 arguments");
+  }
+
+  const payload = args.pop();
+  const type = args.join(".");
+
+  console.log(
+    chalk[typeColor(type)](
+      "react-event",
+      "publish",
+      type,
+      JSON.stringify(payload)
+    )
+  );
   messages.set(type, payload);
 
   Object.keys(subscriptions[type] || {}).forEach((key) => {

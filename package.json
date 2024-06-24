@@ -1,6 +1,6 @@
 {
   "name": "@nucleoidai/react-event",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "type": "module",
   "description": "Event-driven alternative to React Context",
   "main": "index.js",
@@ -16,6 +16,7 @@
   },
   "author": "NucTeam",
   "dependencies": {
+    "chalk": "^4.1.2",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

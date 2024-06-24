@@ -1,7 +1,11 @@
-import React from "react";
-import { publish, subscribe, last } from "./Event.js";
+import { last, publish, subscribe } from "./Event.js";
 
-const useEvent = (type = "", init) => {
+import React from "react";
+
+const useEvent = (...args) => {
+  const init = args.pop();
+  const type = args.join(".");
+
   const [payload, setPayload] = React.useState(last(type, init));
 
   React.useEffect(() => {
@@ -18,3 +22,4 @@ const useEvent = (type = "", init) => {
 };
 
 export { useEvent };
+
