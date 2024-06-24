@@ -3,6 +3,17 @@ import { v4 as uuid } from "uuid";
 const subscriptions = {};
 const messages = new Map();
 
+const colors = [
+  "red",
+  "green",
+  "yellow",
+  "blue",
+  "magenta",
+  "cyan",
+  "white",
+  "gray",
+];
+
 const subscribe = (...args) => {
   const callback = args.pop();
   const type = args.join(".");
