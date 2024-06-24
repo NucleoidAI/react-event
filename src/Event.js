@@ -31,6 +31,10 @@ function typeColor(type) {
 }
 
 const subscribe = (...args) => {
+  if (args.length < 2) {
+    throw new Error("subscribe requires at least 2 arguments");
+  }
+
   const callback = args.pop();
   const type = args.join(".");
   const id = uuid();
@@ -69,6 +73,10 @@ const subscribe = (...args) => {
 };
 
 const publish = (...args) => {
+  if (args.length < 2) {
+    throw new Error("publish requires at least 2 arguments");
+  }
+
   const payload = args.pop();
   const type = args.join(".");
 

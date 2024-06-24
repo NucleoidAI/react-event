@@ -1,6 +1,10 @@
 import { subscribe, publish, messages } from "../Event.js";
 
 describe("react-event", () => {
+  it("accepts type and payload", () => {
+    expect(() => publish("TEST_EVENT")).toThrow();
+  });
+
   it("subscribes and publishes events", (done) => {
     subscribe("TEST_EVENT", (result) => {
       expect(result).toMatchObject({ number: 10, string: "blue" });
