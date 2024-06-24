@@ -53,9 +53,21 @@ const subscribe = (...args) => {
 const publish = (...args) => {
   const payload = args.pop();
   const type = args.join(".");
-  const id = uuid();
 
-  console.log(chalk.green("react-event", "publish", type, payload));
+  const hash = (str) => {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = (hash << 5) - hash + char;
+      hash = hash & hash;
+    }
+    return Math.abs(hash);
+  };
+
+  const colorIndex = hash(type) % colors.length;
+  const color = colors[colorIndex];
+
+  console.log(chalk[color]("react-event", "publish", type, payload));
   messages.set(type, payload);
 
   Object.keys(subscriptions[type] || {}).forEach((key) => {
@@ -76,7 +88,4 @@ function last(type, init) {
 }
 
 export { subscribe, publish, messages, last };
-
-//publish("PLATFORM", "WEB", "INSERT", {id:123})
-//publish(namespace,namespace,type,payload)
 
