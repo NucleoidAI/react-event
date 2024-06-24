@@ -96,4 +96,16 @@ describe("react-event", () => {
 
     publish("CALLBACK_REGISTRY_EVENT_2", { data: "test payload 2" });
   });
+
+  it("supports namespaced events", (done) => {
+    subscribe("NAMESPACE_1", "NAMESPACE_2", "TEST_EVENT", (result) => {
+      expect(result).toMatchObject({ number: 10, string: "blue" });
+      done();
+    });
+
+    publish("NAMESPACE_1", "NAMESPACE_2", "TEST_EVENT", {
+      number: 10,
+      string: "blue",
+    });
+  });
 });
