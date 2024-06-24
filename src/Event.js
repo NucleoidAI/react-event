@@ -1,5 +1,6 @@
 import chalk from "chalk";
 import { v4 as uuid } from "uuid";
+
 const subscriptions = {};
 const messages = new Map();
 
@@ -14,12 +15,27 @@ const colors = [
   "gray",
 ];
 
+function typeColor(type) {
+  const hash = (str) => {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = (hash << 5) - hash + char;
+      hash = hash & hash;
+    }
+    return Math.abs(hash);
+  };
+
+  const colorIndex = hash(type) % colors.length;
+  return colors[colorIndex];
+}
+
 const subscribe = (...args) => {
   const callback = args.pop();
   const type = args.join(".");
   const id = uuid();
 
-  console.debug("react-event", "subscribe", type, id);
+  console.debug(chalk[typeColor(type)]("react-event", "subscribe", type, id));
 
   if (!subscriptions[type]) {
     subscriptions[type] = {};
@@ -30,7 +46,9 @@ const subscribe = (...args) => {
     type,
     callback,
     unsubscribe: () => {
-      console.debug("react-event", "unsubscribe", type, id);
+      console.debug(
+        chalk[typeColor(type)]("react-event", "unsubscribe", type, id)
+      );
       delete subscriptions[type][id];
 
       if (Object.keys(subscriptions[type]).length === 0) {
@@ -54,20 +72,14 @@ const publish = (...args) => {
   const payload = args.pop();
   const type = args.join(".");
 
-  const hash = (str) => {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-      const char = str.charCodeAt(i);
-      hash = (hash << 5) - hash + char;
-      hash = hash & hash;
-    }
-    return Math.abs(hash);
-  };
-
-  const colorIndex = hash(type) % colors.length;
-  const color = colors[colorIndex];
-
-  console.log(chalk[color]("react-event", "publish", type, payload));
+  console.log(
+    chalk[typeColor(type)](
+      "react-event",
+      "publish",
+      type,
+      JSON.stringify(payload)
+    )
+  );
   messages.set(type, payload);
 
   Object.keys(subscriptions[type] || {}).forEach((key) => {
@@ -88,4 +100,3 @@ function last(type, init) {
 }
 
 export { subscribe, publish, messages, last };
-
