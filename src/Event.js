@@ -39,7 +39,7 @@ const subscribe = (...args) => {
   const type = args.join(".");
   const id = uuid();
 
-  console.debug(chalk[typeColor(type)]("react-event", "subscribe", type, id));
+  console.debug("react-event", "subscribe", type, id);
 
   if (!subscriptions[type]) {
     subscriptions[type] = {};
@@ -50,9 +50,7 @@ const subscribe = (...args) => {
     type,
     callback,
     unsubscribe: () => {
-      console.debug(
-        chalk[typeColor(type)]("react-event", "unsubscribe", type, id)
-      );
+      console.debug("react-event", "unsubscribe", type, id);
       delete subscriptions[type][id];
 
       if (Object.keys(subscriptions[type]).length === 0) {
@@ -80,14 +78,7 @@ const publish = (...args) => {
   const payload = args.pop();
   const type = args.join(".");
 
-  console.log(
-    chalk[typeColor(type)](
-      "react-event",
-      "publish",
-      type,
-      JSON.stringify(payload)
-    )
-  );
+  console.log("react-event", "publish", type, payload);
   messages.set(type, payload);
 
   Object.keys(subscriptions[type] || {}).forEach((key) => {
