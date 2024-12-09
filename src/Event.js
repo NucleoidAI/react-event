@@ -41,6 +41,9 @@ const subscribe = (...args) => {
 
   console.debug("react-event", "subscribe", type, id);
 
+  if (type === '__proto__' || type === 'constructor' || type === 'prototype') {
+    throw new Error("Invalid subscription type");
+  }
   if (!subscriptions[type]) {
     subscriptions[type] = {};
   }
@@ -81,6 +84,9 @@ const publish = (...args) => {
   console.log("react-event", "publish", type, payload);
   messages.set(type, payload);
 
+  if (type === '__proto__' || type === 'constructor' || type === 'prototype') {
+    throw new Error("Invalid publish type");
+  }
   Object.keys(subscriptions[type] || {}).forEach((key) => {
     const registry = subscriptions[type][key];
 
