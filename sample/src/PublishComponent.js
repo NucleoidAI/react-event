@@ -1,5 +1,6 @@
 import React from "react";
-import { publish } from "@nucleoidai/react-event";
+import { WS_URL } from "./eventConfig";
+import { publish } from "react-event-test/client";
 
 const colors = [
   "black",
@@ -27,8 +28,7 @@ const PublishComponent = () => {
       className={"btn btn-primary"}
       onClick={() => {
         const number = Math.floor(Math.random() * 100);
-
-        publish("BUTTON_CLICKED", {
+        publish(WS_URL, "BUTTON_CLICKED", {
           number,
           string: colors[number % 16],
         });

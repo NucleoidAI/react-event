@@ -1,6 +1,6 @@
 {
-  "name": "@nucleoidai/react-event",
-  "version": "1.1.9",
+  "name": "react-event-test",
+  "version": "1.2.0",
   "type": "module",
   "description": "Event-driven alternative to React Context",
   "main": "index.js",
@@ -17,7 +17,8 @@
   "author": "NucTeam",
   "dependencies": {
     "chalk": "^4.1.2",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "ws": "^8.18.2"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.20.2",
@@ -33,5 +34,9 @@
   },
   "bugs": {
     "url": "https://github.com/NucleoidAI/react-event/issues"
+  },
+  "exports": {
+    "./client": "./src/client/index.js",
+    "./server": "./src/server/index.js"
   }
 }

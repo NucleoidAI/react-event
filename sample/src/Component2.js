@@ -1,8 +1,9 @@
 import React from "react";
-import { useEvent } from "@nucleoidai/react-event";
+import { WS_URL } from "./eventConfig";
+import { useEvent } from "react-event-test/client";
 
 const Component2 = () => {
-  const [event] = useEvent("BUTTON_CLICKED", { string: "blue" });
+  const [event] = useEvent(WS_URL, "BUTTON_CLICKED", { string: "blue" });
 
   return (
     <div className={"card"}>
